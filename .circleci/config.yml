@@ -25,7 +25,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
-          name: Build and Push Docker image
+          name: Build and push Docker image
           command: |       
             pipenv install --skip-lock
             pipenv run pyinstaller -F hello_world.py
@@ -59,7 +59,7 @@ jobs:
             source $BASH_ENV
             gcloud auth activate-service-account --key-file ${HOME}/project/pulumi/gcp/gke/cicd_demo_gcp_creds.json
       - pulumi/update:
-          stack: k8s
+          stack: dev
           working_directory: ${HOME}/project/pulumi/gcp/gke/
 workflows:
   build_test_deploy:
