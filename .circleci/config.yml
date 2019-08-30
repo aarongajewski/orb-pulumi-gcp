@@ -58,9 +58,7 @@ jobs:
             echo 'export PATH=$PATH:~/google-cloud-sdk/bin' >> $BASH_ENV
             source $BASH_ENV
             gcloud auth activate-service-account --key-file ${HOME}/project/pulumi/gcp/gke/cicd_demo_gcp_creds.json
-      - pulumi/update:
-          stack: dev
-          working_directory: ${HOME}/project/pulumi/gcp/gke/
+      - run: pulumi destroy -s agajewski/gke/dev      
 workflows:
   build_test_deploy:
     jobs:
