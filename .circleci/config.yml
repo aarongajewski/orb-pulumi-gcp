@@ -25,7 +25,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
-          name: Build and Push Docker image
+          name: Build and push Docker image
           command: |       
             pipenv install --skip-lock
             pipenv run pyinstaller -F hello_world.py
