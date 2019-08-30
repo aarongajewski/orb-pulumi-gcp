@@ -69,11 +69,11 @@ users:
         expiry-key: '{expToken}'
         token-key: '{tokenKey}'
       name: gcp
-    '''.format(masterAuth=master_auth, context=context, endpoint=endpoint, 
+    '''.format(masterAuth=master_auth, context=context, endpoint=endpoint,
             prefs='{}', expToken = '{.credential.token_expiry}', tokenKey='{.credential.access_token}')
 
     return config
-    
+
 gke_masterAuth = cluster.master_auth['clusterCaCertificate']
 gke_endpoint = cluster.endpoint
 gke_context = gcp_project+'_'+gcp_zone+'_'+cluster_name
