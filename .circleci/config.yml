@@ -60,7 +60,7 @@ jobs:
             gcloud auth activate-service-account --key-file ${HOME}/project/pulumi/gcp/gke/cicd_demo_gcp_creds.json
       - pulumi/update:
           stack: dev
-          working_directory: ${HOME}/project/pulumi/gcp/gke/
+          working_directory: ${HOME}/project/pulumi/gcp/gke/   
 workflows:
   build_test_deploy:
     jobs:
