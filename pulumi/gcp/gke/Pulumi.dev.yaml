@@ -1,6 +1,6 @@
 config:
   gcp:credentials: ./cicd_demo_gcp_creds.json
-  gcp:project: gke-test-project-251412
+  gcp:project: gsummit-gke
   gcp:region: us-east1
   gcp:zone: us-east1-d
   gke:name: dev
