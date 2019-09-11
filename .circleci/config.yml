@@ -25,8 +25,8 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: false
       - run:
-          name: Build and Push Docker image
-          command: |       
+          name: Build and push Docker image
+          command: |
             pipenv install --skip-lock
             pipenv run pyinstaller -F hello_world.py
             echo 'export TAG=${CIRCLE_SHA1}' >> $BASH_ENV
@@ -37,7 +37,7 @@ jobs:
             docker push $DOCKER_LOGIN/$IMAGE_NAME
   deploy_to_gcp:
     docker:
-      
+
       - image: circleci/python:3.7.2
         environment:
           CLOUDSDK_PYTHON: '/usr/bin/python2.7'
@@ -54,13 +54,13 @@ jobs:
             curl -o gcp-cli.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/google-cloud-sdk.tar.gz
             tar -xzvf gcp-cli.tar.gz
             echo ${GOOGLE_CLOUD_KEYS} | base64 --decode --ignore-garbage > ${HOME}/project/pulumi/gcp/gke/cicd_demo_gcp_creds.json
-            ./google-cloud-sdk/install.sh  --quiet 
+            ./google-cloud-sdk/install.sh  --quiet
             echo 'export PATH=$PATH:~/google-cloud-sdk/bin' >> $BASH_ENV
             source $BASH_ENV
             gcloud auth activate-service-account --key-file ${HOME}/project/pulumi/gcp/gke/cicd_demo_gcp_creds.json
       - pulumi/update:
           stack: dev
-          working_directory: ${HOME}/project/pulumi/gcp/gke/   
+          working_directory: ${HOME}/project/pulumi/gcp/gke/
 workflows:
   build_test_deploy:
     jobs:
@@ -73,4 +73,4 @@ workflows:
           - build_push_image
           filters:
             branches:
-              only: master          
+              only: master
